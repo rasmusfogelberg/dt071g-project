@@ -1,0 +1,584 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiApp1.ViewModels"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="#FCFCFC">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <!--Main Grid layout-->
+        <Grid Margin="30" HeightRequest="1000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" /> <!--0-->
+                <RowDefinition Height="0.4*" /> <!--1-->
+                <RowDefinition Height="4*" /> <!--2-->
+                <RowDefinition Height="0.8*" /> <!--3-->
+                <RowDefinition Height="2*" /> <!--4-->
+                <RowDefinition Height="0.5*" /> <!--5-->
+                <RowDefinition Height="0.6*" /> <!--6-->
+                <RowDefinition Height="4*" /> <!--7-->
+                <RowDefinition Height="0.6*" /> <!--8-->
+                <RowDefinition Height="0.6*" /> <!--9-->
+                <RowDefinition Height="1*" /> <!--10-->
+                <RowDefinition Height="5*" /> <!--11-->
+                <RowDefinition Height="1*" /> <!--12-->
+            </Grid.RowDefinitions>
+
+            <!--Title and Money count-->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Text="Clicker Game"
+                    SemanticProperties.HeadingLevel="Level1"
+                    Grid.Column="0"
+                    FontSize="20"
+                    TextDecorations="Underline"
+                    TextColor="#505050"
+                 />
+
+                <Label
+                    Text="{Binding Money.AmountCountDisplay}"
+                    Grid.Column="1"
+                    FontSize="20"
+                    TextColor="#505050"
+                    HorizontalTextAlignment="End"
+                />
+
+            </Grid>
+
+            <!--Ore selling-->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1.2*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+
+               <Label 
+                    Text="{Binding Path=Ore.OreCountDisplay, Mode=TwoWay}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalTextAlignment="Center"
+                    FontSize="18"
+                />
+
+                <Label
+                    Text="0 generated/s"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    HorizontalTextAlignment="End"
+                    VerticalTextAlignment="Center"
+                    FontSize="18"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy1}"
+                    Text="Sell 1"
+                    Grid.Row="1"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#33FFEE00"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy10}"
+                    Text="Sell 10"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#66FFEE00"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy100}"
+                    Text="Sell 100"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#99FFEE00"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy500}"
+                    Text="Sell 500"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#CCFFEE00"
+                />
+
+                <!--Ore auto-sell-->
+                <Grid Grid.Row="2" Grid.ColumnSpan="4">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*" />
+                        <ColumnDefinition Width="0.8*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Text="Auto-sell ore/s:" 
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                    />
+
+                    <Label
+                        Text="{Binding Path=Ore.OreSlider, Mode=TwoWay}"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        FontSize="16"
+                    />
+
+                    <Label
+                        Grid.Column="2"
+                        Text="1 Ore = 1 Money" 
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="End"
+                    />
+
+                </Grid>
+
+                <Slider
+                    Grid.Row="4"
+                    Grid.ColumnSpan="3"
+                    Minimum="0"
+                    Maximum="10"
+                    Value="{Binding Path=Ore.OreSlider, Mode=TwoWay}"
+                    />
+
+                <Switch
+                    IsToggled="{Binding Path=Ore.OreSwitch, Mode=TwoWay}"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    HorizontalOptions="End"
+                    BackgroundColor="#33940A0A"
+                    OnColor="#CC6EFF00"
+                    ThumbColor="Grey"
+                    />
+
+
+            </Grid>
+
+            <!--Clicker buttons-->
+            <Button
+                Command="{Binding IncreaseOreClick}"
+                Text="Mine Ore"
+                Grid.Row="4"
+                FontSize="16"
+                TextColor="#505050"
+                BackgroundColor="#4D9FFF56"
+            />
+
+            <Button
+                Command="{Binding IncreaseBarClick}"
+                Text="Smelt Ore"
+                Grid.Row="4"
+                Grid.Column="1"
+                FontSize="16"
+                TextColor="#505050"
+                BackgroundColor="#999FFF56"
+            />
+
+            <Label 
+                Text="2 ores smelts into 1 bar"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                />
+
+            <!--Bar selling-->
+            <Grid Grid.Row="7" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1.2*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Text="{Binding Path=Bar.BarCountDisplay, Mode=TwoWay}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalTextAlignment="Center"
+                    FontSize="18"
+                />
+
+                <Label
+                    Text="0 generated/s"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    HorizontalTextAlignment="End"
+                    VerticalTextAlignment="Center"
+                    FontSize="18"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy3}"
+                    Text="Sell 1"
+                    Grid.Row="1"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#33FFEE00"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy30}"
+                    Text="Sell 10"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#66FFEE00"
+                />
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy300}"
+                    Text="Sell 100"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#99FFEE00"
+                />
+
+
+                <Button
+                    Command="{Binding IncreaseMoneyBy1500}"
+                    Text="Sell 500"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    FontSize="14"
+                    TextColor="#505050"
+                    BackgroundColor="#CCFFEE00"
+                />
+
+                <!--Bar Auto-sell -->
+                <Grid Grid.Row="2" Grid.ColumnSpan="4">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*" />
+                        <ColumnDefinition Width="0.8*" />
+                        <ColumnDefinition Width="1.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Text="Auto-sell bar/s:" 
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                    />
+
+                    <Label
+                        Text="{Binding Path=Bar.BarSlider, Mode=TwoWay}"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        FontSize="16"
+                    />
+
+                    <Label
+                        Grid.Column="2"
+                        Text="1 Bar = 3 Money" 
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="End"
+                    />
+
+                </Grid>
+
+                <Slider
+                    Grid.Row="3"
+                    Grid.ColumnSpan="3"
+                    Minimum="0"
+                    Maximum="10"
+                    Value="{Binding Path=Bar.BarSlider, Mode=TwoWay}"
+                    />
+
+                <Switch
+                    IsToggled="{Binding Path=Bar.BarSwitch, Mode=TwoWay}"
+                    Grid.Row="3"
+                    Grid.Column="3"
+                    HorizontalOptions="End"
+                    BackgroundColor="#33940A0A"
+                    OnColor="#CC6EFF00"
+                    ThumbColor="Grey"
+                    />
+
+            </Grid>
+
+            <Label 
+                Text="Buy Machines for auto mining and smelting"
+                Grid.Row="9"
+                Grid.ColumnSpan="2"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="16"
+                FontAttributes="Bold"
+                />
+
+            <Label 
+                Text="Miners"
+                Grid.Row="10"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                />
+
+            <Label 
+                Text="Smelters"
+                Grid.Row="10"
+                Grid.Column="1"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                />
+
+            <Grid Grid.Row="11" Grid.ColumnSpan="2">
+            
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="1.6*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="1.6*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="1.6*" />
+
+                </Grid.RowDefinitions>
+            
+                <Label 
+                    Text="{Binding Ore.MiniOrePerSecDisplay}"
+                    Grid.Row="0"
+                    Grid.Column="0"         
+                />
+
+                <Label 
+                    Text="{Binding Ore.MiniOreMachineCostDisplay}"
+                    Grid.Row="0"
+                    Grid.Column="1" 
+                />
+
+                <Button 
+                    Text="Buy"
+                    Command="{Binding BuyOreMini}"
+                    CommandParameter="Mini"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    WidthRequest="60"
+                    BackgroundColor="#333BC3FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                />
+
+                <Label 
+                    Text="{Binding Ore.MiniOrePerSecDisplay}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center"
+                />
+
+                <Label 
+                    Text="Mega: 0"
+                    Grid.Row="3"
+                    Grid.Column="0"         
+                />
+
+                <Label 
+                    Text="Cost: 5000"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                                
+                />
+
+                <Button 
+                    Text="Buy"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    WidthRequest="60"
+                    BackgroundColor="#803BC3FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                />
+
+                <Label 
+                    Text="Ore/s: 0"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center"
+                />
+
+                <Label 
+                    Text="Super: 0"
+                    Grid.Row="6"
+                    Grid.Column="0" 
+                />
+
+                <Label 
+                    Text="Cost: 10 000"
+                    Grid.Row="6"
+                    Grid.Column="1"          
+                />
+
+                <Button 
+                    Text="Buy"
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    WidthRequest="60"
+                    BackgroundColor="#CC3BC3FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                />
+
+                <Label 
+                    Text="Ore/s: 0"
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center"
+                />
+
+                <Label 
+                    Text="Mini: 0"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalTextAlignment="End"            
+                />
+
+                <Label 
+                    Text="Cost: 100"
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalTextAlignment="End"
+                />
+
+                <Button 
+                    Text="Buy"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    WidthRequest="60"
+                    BackgroundColor="#33FA77FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                    HorizontalOptions="End"
+                />
+
+                <Label 
+                    Text="Ore/s: 0"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                />
+
+                <Label 
+                    Text="Mega: 0"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    HorizontalTextAlignment="End"            
+                />
+
+                <Label 
+                    Text="Cost: 5000"
+                    Grid.Row="3"
+                    Grid.Column="3"
+                    HorizontalTextAlignment="End"
+                />
+
+                <Button 
+                    Text="Buy"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    WidthRequest="60"
+                    BackgroundColor="#80FA77FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                    HorizontalOptions="End"
+                />
+
+                <Label 
+                    Text="Ore/s: 0"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                />
+
+                <Label 
+                    Text="Super: 0"
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    HorizontalTextAlignment="End"            
+                />
+
+                <Label 
+                    Text="Cost: 10 000"
+                    Grid.Row="6"
+                    Grid.Column="3"
+                    HorizontalTextAlignment="End"       
+                />
+
+                <Button 
+                    Text="Buy"
+                    Grid.Row="7"
+                    Grid.Column="2"
+                    WidthRequest="60"
+                    BackgroundColor="#CCFA77FF"
+                    TextColor="#505050"
+                    FontSize="16"
+                    HorizontalOptions="End"
+                />
+
+                <Label 
+                    Text="Ore/s: 0"
+                    Grid.Row="7"
+                    Grid.Column="3"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                />
+
+            </Grid>
+        
+        </Grid>
+    </ScrollView>
+</ContentPage>
