@@ -19,19 +19,19 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" /> <!--0-->
-                <RowDefinition Height="0.4*" /> <!--1-->
-                <RowDefinition Height="4*" /> <!--2-->
-                <RowDefinition Height="0.8*" /> <!--3-->
-                <RowDefinition Height="2*" /> <!--4-->
-                <RowDefinition Height="0.5*" /> <!--5-->
-                <RowDefinition Height="0.6*" /> <!--6-->
-                <RowDefinition Height="4*" /> <!--7-->
-                <RowDefinition Height="0.6*" /> <!--8-->
-                <RowDefinition Height="0.6*" /> <!--9-->
-                <RowDefinition Height="1*" /> <!--10-->
-                <RowDefinition Height="5*" /> <!--11-->
-                <RowDefinition Height="1*" /> <!--12-->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
             <!--Title and Money count-->
@@ -76,8 +76,8 @@
                     <RowDefinition Height="0.5*" />
                 </Grid.RowDefinitions>
 
-               <Label 
-                    Text="{Binding Path=Ore.OreCountDisplay, Mode=TwoWay}"
+                <Label 
+                    Text="{Binding Ore.OreCountDisplay}"
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -86,7 +86,7 @@
                 />
 
                 <Label
-                    Text="0 generated/s"
+                    Text="{Binding Ore.OreTotalPerSecDisplay}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Grid.ColumnSpan="2"
@@ -150,7 +150,7 @@
                     />
 
                     <Label
-                        Text="{Binding Path=Ore.OreSlider, Mode=TwoWay}"
+                        Text="{Binding Ore.OreSlider}"
                         Grid.Column="1"
                         VerticalOptions="Center"
                         FontSize="16"
@@ -166,24 +166,24 @@
 
                 </Grid>
 
+                <!--Slider to set value for how much ore should be sold per second-->
                 <Slider
                     Grid.Row="4"
                     Grid.ColumnSpan="3"
                     Minimum="0"
-                    Maximum="10"
-                    Value="{Binding Path=Ore.OreSlider, Mode=TwoWay}"
-                    />
+                    Maximum="1000"
+                    Value="{Binding Ore.OreSlider}"
+                />
 
                 <Switch
-                    IsToggled="{Binding Path=Ore.OreSwitch, Mode=TwoWay}"
+                    IsToggled="{Binding Ore.OreSwitch}"
                     Grid.Row="4"
                     Grid.Column="3"
                     HorizontalOptions="End"
                     BackgroundColor="#33940A0A"
                     OnColor="#CC6EFF00"
                     ThumbColor="Grey"
-                    />
-
+                />
 
             </Grid>
 
@@ -213,7 +213,7 @@
                 Grid.ColumnSpan="2"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
-                />
+            />
 
             <!--Bar selling-->
             <Grid Grid.Row="7" Grid.ColumnSpan="2">
@@ -232,7 +232,7 @@
                 </Grid.RowDefinitions>
 
                 <Label
-                    Text="{Binding Path=Bar.BarCountDisplay, Mode=TwoWay}"
+                    Text="{Binding Bar.BarCountDisplay}"
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -241,7 +241,7 @@
                 />
 
                 <Label
-                    Text="0 generated/s"
+                    Text="{Binding Bar.BarTotalPerSecDisplay}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Grid.ColumnSpan="2"
@@ -306,7 +306,7 @@
                     />
 
                     <Label
-                        Text="{Binding Path=Bar.BarSlider, Mode=TwoWay}"
+                        Text="{Binding Bar.BarSlider}"
                         Grid.Column="1"
                         VerticalOptions="Center"
                         FontSize="16"
@@ -322,16 +322,17 @@
 
                 </Grid>
 
+                <!--Slider to set value for how many bars should be sold per second-->
                 <Slider
                     Grid.Row="3"
                     Grid.ColumnSpan="3"
                     Minimum="0"
-                    Maximum="10"
-                    Value="{Binding Path=Bar.BarSlider, Mode=TwoWay}"
+                    Maximum="500"
+                    Value="{Binding Bar.BarSlider}"
                     />
 
                 <Switch
-                    IsToggled="{Binding Path=Bar.BarSwitch, Mode=TwoWay}"
+                    IsToggled="{Binding Bar.BarSwitch}"
                     Grid.Row="3"
                     Grid.Column="3"
                     HorizontalOptions="End"
@@ -342,6 +343,7 @@
 
             </Grid>
 
+            <!--Machine buying-->
             <Label 
                 Text="Buy Machines for auto mining and smelting"
                 Grid.Row="9"
@@ -368,7 +370,7 @@
                 />
 
             <Grid Grid.Row="11" Grid.ColumnSpan="2">
-            
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.7*" />
                     <ColumnDefinition Width="1*" />
@@ -385,24 +387,23 @@
                     <RowDefinition Height="0.8*" />
                     <RowDefinition Height="0.8*" />
                     <RowDefinition Height="1.6*" />
-
                 </Grid.RowDefinitions>
-            
+
                 <Label 
-                    Text="{Binding Ore.MiniOrePerSecDisplay}"
+                    Text="{Binding Ore.OreMiniDisplay}"
                     Grid.Row="0"
                     Grid.Column="0"         
                 />
 
                 <Label 
-                    Text="{Binding Ore.MiniOreMachineCostDisplay}"
+                    Text="{Binding Ore.OreMiniCostDisplay}"
                     Grid.Row="0"
                     Grid.Column="1" 
                 />
 
                 <Button 
                     Text="Buy"
-                    Command="{Binding BuyOreMini}"
+                    Command="{Binding BuyAutoOreMiner}"
                     CommandParameter="Mini"
                     Grid.Row="1"
                     Grid.Column="0"
@@ -413,20 +414,20 @@
                 />
 
                 <Label 
-                    Text="{Binding Ore.MiniOrePerSecDisplay}"
+                    Text="{Binding Ore.OreMiniPerSecDisplay}"
                     Grid.Row="1"
                     Grid.Column="1"
                     VerticalTextAlignment="Center"
                 />
 
                 <Label 
-                    Text="Mega: 0"
+                    Text="{Binding Ore.OreMegaDisplay}"
                     Grid.Row="3"
                     Grid.Column="0"         
                 />
 
                 <Label 
-                    Text="Cost: 5000"
+                    Text="{Binding Ore.OreMegaCostDisplay}"
                     Grid.Row="3"
                     Grid.Column="1"
                                 
@@ -434,6 +435,8 @@
 
                 <Button 
                     Text="Buy"
+                    Command="{Binding BuyAutoOreMiner}"
+                    CommandParameter="Mega"
                     Grid.Row="4"
                     Grid.Column="0"
                     WidthRequest="60"
@@ -443,26 +446,28 @@
                 />
 
                 <Label 
-                    Text="Ore/s: 0"
+                    Text="{Binding Ore.OreMegaPerSecDisplay}"
                     Grid.Row="4"
                     Grid.Column="1"
                     VerticalTextAlignment="Center"
                 />
 
                 <Label 
-                    Text="Super: 0"
+                    Text="{Binding Ore.OreSuperDisplay}"
                     Grid.Row="6"
                     Grid.Column="0" 
                 />
 
                 <Label 
-                    Text="Cost: 10 000"
+                    Text="{Binding Ore.OreSuperCostDisplay}"
                     Grid.Row="6"
                     Grid.Column="1"          
                 />
 
                 <Button 
                     Text="Buy"
+                    Command="{Binding BuyAutoOreMiner}"
+                    CommandParameter="Super"
                     Grid.Row="7"
                     Grid.Column="0"
                     WidthRequest="60"
@@ -472,21 +477,21 @@
                 />
 
                 <Label 
-                    Text="Ore/s: 0"
+                    Text="{Binding Ore.OreSuperPerSecDisplay}"
                     Grid.Row="7"
                     Grid.Column="1"
                     VerticalTextAlignment="Center"
                 />
 
                 <Label 
-                    Text="Mini: 0"
+                    Text="{Binding Bar.BarMiniDisplay}"
                     Grid.Row="0"
                     Grid.Column="2"
                     HorizontalTextAlignment="End"            
                 />
 
                 <Label 
-                    Text="Cost: 100"
+                    Text="{Binding Bar.BarMiniCostDisplay}"
                     Grid.Row="0"
                     Grid.Column="3"
                     HorizontalTextAlignment="End"
@@ -494,6 +499,8 @@
 
                 <Button 
                     Text="Buy"
+                    Command="{Binding BuyAutoBarSmelter}"
+                    CommandParameter="Mini"
                     Grid.Row="1"
                     Grid.Column="2"
                     WidthRequest="60"
@@ -504,7 +511,7 @@
                 />
 
                 <Label 
-                    Text="Ore/s: 0"
+                    Text="{Binding Bar.BarMiniPerSecDisplay}"
                     Grid.Row="1"
                     Grid.Column="3"
                     VerticalTextAlignment="Center"
@@ -512,14 +519,14 @@
                 />
 
                 <Label 
-                    Text="Mega: 0"
+                    Text="{Binding Bar.BarMegaDisplay}"
                     Grid.Row="3"
                     Grid.Column="2"
                     HorizontalTextAlignment="End"            
                 />
 
                 <Label 
-                    Text="Cost: 5000"
+                    Text="{Binding Bar.BarMegaCostDisplay}"
                     Grid.Row="3"
                     Grid.Column="3"
                     HorizontalTextAlignment="End"
@@ -527,6 +534,8 @@
 
                 <Button 
                     Text="Buy"
+                    Command="{Binding BuyAutoBarSmelter}"
+                    CommandParameter="Mega"
                     Grid.Row="4"
                     Grid.Column="2"
                     WidthRequest="60"
@@ -537,7 +546,7 @@
                 />
 
                 <Label 
-                    Text="Ore/s: 0"
+                    Text="{Binding Bar.BarMegaPerSecDisplay}"
                     Grid.Row="4"
                     Grid.Column="3"
                     VerticalTextAlignment="Center"
@@ -545,14 +554,14 @@
                 />
 
                 <Label 
-                    Text="Super: 0"
+                    Text="{Binding Bar.BarSuperDisplay}"
                     Grid.Row="6"
                     Grid.Column="2"
                     HorizontalTextAlignment="End"            
                 />
 
                 <Label 
-                    Text="Cost: 10 000"
+                    Text="{Binding Bar.BarSuperCostDisplay}"
                     Grid.Row="6"
                     Grid.Column="3"
                     HorizontalTextAlignment="End"       
@@ -560,6 +569,8 @@
 
                 <Button 
                     Text="Buy"
+                    Command="{Binding BuyAutoBarSmelter}"
+                    CommandParameter="Super"
                     Grid.Row="7"
                     Grid.Column="2"
                     WidthRequest="60"
@@ -570,7 +581,7 @@
                 />
 
                 <Label 
-                    Text="Ore/s: 0"
+                    Text="{Binding Bar.BarSuperPerSecDisplay}"
                     Grid.Row="7"
                     Grid.Column="3"
                     VerticalTextAlignment="Center"
@@ -578,7 +589,7 @@
                 />
 
             </Grid>
-        
+
         </Grid>
     </ScrollView>
 </ContentPage>
