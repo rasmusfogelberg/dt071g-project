@@ -44,11 +44,12 @@ namespace MauiApp1.ViewModels
             IncreaseOreClick = new Command(_ore.OnOreIncreaseBy1);
             IncreaseBarClick = new Command(() => 
             {
-                _bar.OnBarIncreaseBy1(_ore.OreCount);
+                
                 if (_ore.OreCount > 1)
                 {
                     _ore.OreCount = _ore.OreCount - 2;
                     _ore.OreCountDisplay = $"Ore: {_ore.OreCount}";
+                    _bar.OnBarIncreaseBy1();
                 }
             });
 
