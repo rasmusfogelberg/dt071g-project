@@ -171,7 +171,7 @@
                     Grid.Row="4"
                     Grid.ColumnSpan="3"
                     Minimum="0"
-                    Maximum="1000"
+                    Maximum="500"
                     Value="{Binding Ore.OreSlider}"
                 />
 
@@ -327,7 +327,7 @@
                     Grid.Row="3"
                     Grid.ColumnSpan="3"
                     Minimum="0"
-                    Maximum="500"
+                    Maximum="300"
                     Value="{Binding Bar.BarSlider}"
                     />
 
