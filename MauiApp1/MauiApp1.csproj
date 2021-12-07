@@ -10,10 +10,10 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 
 		<!-- Display name -->
-		<ApplicationTitle>MauiApp1</ApplicationTitle>
+		<ApplicationTitle>Clicker Game</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.MauiApp1</ApplicationId>
+		<ApplicationId>school.project.ClickerGame</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationVersion>1</ApplicationVersion>
