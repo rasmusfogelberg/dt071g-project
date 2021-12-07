@@ -70,11 +70,9 @@ namespace MauiApp1.Models
         // Method to increase bar count by 1 when called as long
         // as oreCount is larger than 1 (1 bar = 2 ore)
         public void OnBarIncreaseBy1()
-        {
-           
-                barCount++;
-                BarCountDisplay = $"Bar: {barCount}";
-            
+        { 
+            barCount++;
+            BarCountDisplay = $"Bar: {barCount}";   
         }
 
         // Method to sell bar for money
