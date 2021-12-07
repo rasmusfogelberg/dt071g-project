@@ -133,12 +133,12 @@ namespace MauiApp1.Models
         // argument is set to true.
         public int Cost(bool check, double machineType)
         {
-            double _cost = machineType;
+            double cost = machineType;
             if (check == true)
             {
-                _cost = _cost * 1.15;
+                cost = cost * 1.15;
             }
-            int roundedCost = (int)Math.Round(_cost);
+            int roundedCost = (int)Math.Round(cost);
             return roundedCost;
         }
 
